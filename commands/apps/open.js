@@ -1,22 +1,17 @@
 'use strict';
 
 let co       = require('co');
-let bluebird = require('bluebird');
-let opn      = bluebird.promisify(require('opn'));
 let cli      = require('heroku-cli-util');
+let extend   = require('util')._extend;
 
 function* run (context, heroku) {
-  let app = yield heroku.apps(context.args.app || context.app).info();
-  try {
-    yield opn('foewjoijw', {wait: false});
-  } catch (err) {
-    throw new Error(`${err}
-Could not open browser window.
-Navigate to ${cli.color.yellow(app.web_url)} in your browser.`);
-  }
+  let app = context.args.app || context.app;
+  if (!app) throw new Error('No app specified');
+  app = yield heroku.apps(app).info();
+  yield cli.open(app.web_url);
 }
 
-module.exports = {
+let cmd = {
   topic: 'apps',
   command: 'open',
   description: 'open the app in a web browser',
@@ -25,3 +20,8 @@ module.exports = {
   args:  [{name: 'app', hidden: true, optional: true}],
   run: cli.command(co.wrap(run))
 };
+
+module.exports.open = cmd;
+module.exports.root = extend({}, cmd);
+module.exports.root.topic = 'open';
+delete module.exports.root.command;
