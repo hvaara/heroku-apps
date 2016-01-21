@@ -18,6 +18,7 @@ exports.commands = [
   require('./commands/apps/create').root,
   require('./commands/apps/info').apps,
   require('./commands/apps/info').root,
+  require('./commands/apps/open'),
   require('./commands/buildpacks'),
   require('./commands/buildpacks/add.js'),
   require('./commands/buildpacks/clear.js'),
