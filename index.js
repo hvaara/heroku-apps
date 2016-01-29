@@ -36,6 +36,7 @@ exports.commands = [
   require('./commands/drains'),
   require('./commands/drains/add'),
   require('./commands/drains/remove'),
+  require('./commands/keys'),
   require('./commands/maintenance/index'),
   require('./commands/maintenance/off'),
   require('./commands/maintenance/on'),

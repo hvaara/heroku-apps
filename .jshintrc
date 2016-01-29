@@ -32,7 +32,6 @@
   },
   "predef": [
     "$",
-    "React",
     "after",
     "afterEach",
     "angular",
@@ -40,6 +39,7 @@
     "beforeEach",
     "browser",
     "by",
+    "context",
     "describe",
     "document",
     "element",
